@@ -1,13 +1,14 @@
 from django.shortcuts import render
+from .serializers import (CreateUserSerializer, ChangePasswordSerializer,
+                          UserSerializer, LoginUserSerializer, ForgetPasswordSerializer)
 
 from rest_framework import permissions, generics, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from account.models import User, PhoneOTP
 from rest_framework.views import APIView
-from .utilmaths import phone_validator, password_generator, otp_generator
-from .serializers import (CreateUserSerializer, ChangePasswordSerializer,
-                          UserSerializer, LoginUserSerializer, ForgetPasswordSerializer)
+from .utilmaths import phone_validator, password_generator, otp_generator 
+import requests
 
 
 def send_otp(phone):
@@ -15,18 +16,21 @@ def send_otp(phone):
     This is an helper function to send otp to session stored phones or 
     passed phone number as argument.
     """
-
+    count=1
     if phone:
-        
+      
         key = otp_generator()
         phone = str(phone)
         otp_key = str(key)
+        link = f'http://182.18.162.128/api/mt/SendSMS?Apikey=L8d8O5gjJ0iRo9tQ7NZzOg&senderid=SOEXAM&channel=Trans&DCS=0&flashsms=0&number={phone}&text= Your One Time Password is: {otp_key} It is valid for 02 min. Do not share with anybody, Need Help Call 0144 4901512 &route=2'
+        # = f'https://2factor.in/API/R1/?module=TRANS_SMS&apikey=c85bcfc6-751e-11ec-b710-0200cd936042={phone}&from=mahend&templatename=smsTest&var1={otp_key}'
+        result = requests.get(link)
+        if Response.status_code == 200:
+           
+           return otp_key
+           
+  
 
-        #link = f'https://2factor.in/API/R1/?module=TRANS_SMS&apikey=fc9e5177-b3e7-11e8-a895-0200cd936042&to={phone}&from=wisfrg&templatename=wisfrags&var1={otp_key}'
-   
-        #result = requests.get(link, verify=False)
-
-        return otp_key
     else:
         return False
 
@@ -37,12 +41,12 @@ class ValidatePhoneSendOTP(APIView):
 
     def post(self, request, *args, **kwargs):
         phone_number = request.data.get('phone')
-        print(phone_number)
         if phone_number:
             phone = str(phone_number)
             user = User.objects.filter(phone__iexact = phone)
             if user.exists():
                 return Response({'status': False, 'detail': 'Phone Number already exists'})
+                 # logic to send the otp and store the phone number and that otp in table. 
             else:
                 otp = send_otp(phone)
                 print(phone, otp)
@@ -54,7 +58,6 @@ class ValidatePhoneSendOTP(APIView):
                         count = old.first().count
                         old.first().count = count + 1
                         old.first().save()
-                        count = count + 1
                     
                     else:
                         count = count + 1
@@ -65,23 +68,25 @@ class ValidatePhoneSendOTP(APIView):
                              count = count
         
                              )
-                    print(count)
                     if count > 7:
                         return Response({
                             'status' : False, 
                              'detail' : 'Maximum otp limits reached. Kindly support our customer care or try with different number'
                         })
+                    
+                    
                 else:
                     return Response({
                                 'status': 'False', 'detail' : "OTP sending error. Please try after some time."
                             })
-            return Response({
+
+                return Response({
                     'status': True, 'detail': 'Otp has been sent successfully.'
                 })
-        return Response({
+        else:
+            return Response({
                 'status': 'False', 'detail' : "I haven't received any phone number. Please do a POST request."
             })
-
 
 
 class ValidateOTP(APIView):
@@ -105,7 +110,7 @@ class ValidateOTP(APIView):
 
                     return Response({
                         'status' : True, 
-                        'detail' : 'OTP matched, kindly proceed to resistration'
+                        'detail' : 'OTP matched, kindly proceed to registration'
                     })
                 else:
                     return Response({
@@ -177,9 +182,3 @@ class Register(APIView):
                 'status' : 'False',
                 'detail' : 'Either phone or password was not recieved in Post request'
             })
-
-
-        
-
-
-
