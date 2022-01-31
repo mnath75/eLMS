@@ -12,11 +12,15 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .forms import UserAdminCreationForm, UserAdminChangeForm
 
-from .models import PhoneOTP
+from .models import PhoneOTP,Profile
 
 admin.site.register(PhoneOTP)
 
-
+class ProfileInline(admin.StackedInline):
+    model = Profile
+    can_delete = False
+    verbose_name_plural = 'Profile'
+    fk_name = 'user'
 
 User = get_user_model()
 class UserAdmin(BaseUserAdmin):
@@ -31,7 +35,7 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('staff','active' ,'admin', )
     fieldsets = (
         (None, {'fields': ('phone', 'password')}),
-        ('Personal info', {'fields': ('name', 'standard','score',)}),
+        ('Personal info', {'fields': ('name',)}),
         ('Permissions', {'fields': ('admin','staff','active' ,'educator','branch','parent')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -47,6 +51,7 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('phone','name')
     ordering = ('phone','name')
     filter_horizontal = ()
+    inlines = (ProfileInline, )
 
 
 
