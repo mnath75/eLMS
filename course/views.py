@@ -1,17 +1,10 @@
 
 # Create your views here.
 from django.shortcuts import render
-from rest_framework.response import Response
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from .serializers import CategorySerializer
+from rest_framework import viewsets
+from .models import Category
 
-from .models import  Category
-from .serializers import  CategoryListSerializer
-
-@api_view(['GET'])
-@authentication_classes([])
-@permission_classes([])
-def get_categories(request):
-    categories=Category.objects.all()
-    serializer=CategoryListSerializer(categories, many=True)
-    print("heeeeeeeeeee")
-    return Response(serializer.data)
+class CategoryModelViewSet(viewsets.ModelViewSet):
+  queryset = Category.objects.all()
+  serializer_class = CategorySerializer
