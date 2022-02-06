@@ -4,14 +4,14 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 
-from .models import  Category
+from .models import  Categorys
 from .serializers import  CategoryListSerializer
 
 @api_view(['GET'])
 @authentication_classes([])
 @permission_classes([])
 def get_categories(request):
-    categories=Category.objects.all()
+    categories=Categorys.objects.all()
     serializer=CategoryListSerializer(categories, many=True)
     print("heeeeeeeeeee")
     return Response(serializer.data)
