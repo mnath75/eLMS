@@ -4,7 +4,6 @@ from .views import (ValidatePhoneSendOTP,ValidateOTP,Register,LoginAPI,ChangePas
                     ForgotPasswordChange,UpdateProfileView,UserView)
 from knox import views as knox_views
 
-
 urlpatterns = [
 
     path('validate_phone/',ValidatePhoneSendOTP.as_view()),

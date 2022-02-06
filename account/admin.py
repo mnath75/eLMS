@@ -16,6 +16,7 @@ from .models import PhoneOTP,Profile
 
 admin.site.register(PhoneOTP)
 
+
 class ProfileInline(admin.StackedInline):
     model = Profile
     can_delete = False

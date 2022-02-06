@@ -1,4 +1,6 @@
 from __future__ import unicode_literals
+from tabnanny import verbose
+from unicodedata import category
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import RegexValidator
@@ -170,3 +172,4 @@ def user_created_receiver(sender, instance, created, *args, **kwargs):
     if created:
         Profile.objects.get_or_create(user = instance)
 post_save.connect(user_created_receiver, sender = User)
+
