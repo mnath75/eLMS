@@ -8,6 +8,6 @@ class CategoryListSerializer(serializers.ModelSerializer):
         fields = ('category_id', 'category_title', 'category_slug')
 
 #class CategorySerializer(serializers.ModelSerializer):
- #class Meta:
-  #model = Category
-  #fields = ['ct_id', 'ct_title']       
+#class Meta:
+#model = Category
+#fields = ['ct_id', 'ct_title']       
