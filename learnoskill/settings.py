@@ -177,7 +177,7 @@ AUTH_USER_MODEL = 'account.User'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-django_heroku.settings(locals())
+
 
 #knox settings 
 REST_FRAMEWORK = {
@@ -188,3 +188,4 @@ REST_KNOX = {
     'USER_SERIALIZER' :'account.serializers.UserSerializer',
     'TOKEN_TTL' : timedelta(hours = 24*7),
 }
+django_heroku.settings(locals())
