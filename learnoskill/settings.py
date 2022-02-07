@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'knox',
     'corsheaders',
-    'course'
+    'course',
    
 ]
 

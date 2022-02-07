@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Category(models.Model):
+class CourseCategory(models.Model):
     category_id=models.AutoField(primary_key=True,db_column='category_id')
     category_title=models.CharField('Title',max_length=255)
     category_slug=models.SlugField('slug',max_length=255,null=True)
