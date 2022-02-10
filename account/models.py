@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from tabnanny import verbose
-from unicodedata import category
+#from unicodedata import category
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import RegexValidator
