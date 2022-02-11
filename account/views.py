@@ -81,18 +81,24 @@ class ChangePasswordView(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = ChangePasswordSerializer
     permission_classes = [permissions.IsAuthenticated, ]
-
+    
 class LoginAPI(KnoxLoginView):
-    permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.AllowAny,)
 
     def post(self, request, format=None):
         serializer = LoginUserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
-
+        if user.last_login is None :
+            user.first_login = True
+            user.save()
+            
+        elif user.first_login:
+            user.first_login = False
+            user.save()
+            
         login(request, user)
         return super().post(request, format=None)
-
 
 def send_otp(phone):
     """
