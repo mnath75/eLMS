@@ -17,7 +17,8 @@ class Course(models.Model):
     cr_categ = models.ManyToManyField(CourseCategory,
                             verbose_name='Category',
                             db_column = 'cr_categ',
-                            related_name='courses')
+                            related_name='courses',
+                            null=True)
     cr_title = models.CharField('Title', max_length=255)
     cr_slug = models.SlugField('Slug', max_length=255)
     cr_short = models.TextField('Short description', blank=True, null=True)
