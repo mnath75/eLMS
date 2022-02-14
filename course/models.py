@@ -23,3 +23,5 @@ class Course(models.Model):
     cr_short = models.TextField('Short description', blank=True, null=True)
     cr_long = models.TextField('Long description', blank=True, null=True)
     cr_created_at = models.DateTimeField('Created at', auto_now_add=True)
+    def __str__(self):
+        return self.cr_title

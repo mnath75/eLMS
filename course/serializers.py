@@ -17,6 +17,6 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class CourseSerializer(serializers.ModelSerializer):
- class Meta:
-  model = Course
-  fields = ['cr_id','cr_title','cr_slug','cr_categ']     
+    class Meta:
+        model = Course
+        fields = ('cr_id','cr_title','cr_slug','cr_categ')     
