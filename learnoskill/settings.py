@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'knox',
     'corsheaders',
     'course',
+    'django_filters',
    
 ]
 

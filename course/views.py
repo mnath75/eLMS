@@ -4,6 +4,8 @@ from django.shortcuts import render
 from .serializers import CategorySerializer,CourseSerializer
 from rest_framework import viewsets
 from .models import CourseCategory,Course
+from rest_framework.response import Response
+from django_filters import rest_framework as filters
 
 class CategoryModelViewSet(viewsets.ModelViewSet):
   queryset = CourseCategory.objects.all()
@@ -13,4 +15,10 @@ class CategoryModelViewSet(viewsets.ModelViewSet):
 
 class CourseModelViewSet(viewsets.ModelViewSet):
   queryset = Course.objects.all()
+  filter_backends = (filters.DjangoFilterBackend,)
+  filterset_fields = ['cr_categ']
   serializer_class = CourseSerializer  
+
+
+
+ 
