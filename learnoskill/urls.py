@@ -22,6 +22,7 @@ router = DefaultRouter()
 from course import views
 router.register('categoryapi', views.CategoryModelViewSet, basename='category')
 router.register('courseapi', views.CourseModelViewSet, basename='course')
+router.register('subjectapi', views.SubjectModelViewSet, basename='subject')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include('account.urls')),

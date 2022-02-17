@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from.models import CourseCategory,Course
+from.models import CourseCategory,Course,Subject
 from rest_framework import serializers
 
 
@@ -19,4 +19,9 @@ class CategorySerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ('cr_id','cr_title','cr_slug','cr_categ')     
+        fields = ('cr_id','cr_title','cr_slug','cr_categ')   
+
+class SubjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subject
+        fields = ('sub_id','sub_title','sub_slug','sub_course') 

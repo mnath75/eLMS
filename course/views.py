@@ -1,9 +1,9 @@
 
 # Create your views here.
 from django.shortcuts import render
-from .serializers import CategorySerializer,CourseSerializer
+from .serializers import CategorySerializer,CourseSerializer,SubjectSerializer
 from rest_framework import viewsets
-from .models import CourseCategory,Course
+from .models import CourseCategory,Course,Subject
 from rest_framework.response import Response
 from django_filters import rest_framework as filters
 
@@ -19,6 +19,11 @@ class CourseModelViewSet(viewsets.ModelViewSet):
   filterset_fields = ['cr_categ']
   serializer_class = CourseSerializer  
 
+class SubjectModelViewSet(viewsets.ModelViewSet):
+  queryset = Subject.objects.all()
+  filter_backends = (filters.DjangoFilterBackend,)
+  filterset_fields = ['sub_course']
+  serializer_class = SubjectSerializer 
 
 
  

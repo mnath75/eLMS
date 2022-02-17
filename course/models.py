@@ -26,3 +26,19 @@ class Course(models.Model):
     cr_created_at = models.DateTimeField('Created at', auto_now_add=True)
     def __str__(self):
         return self.cr_title
+
+
+class Subject(models.Model):
+    sub_id = models.AutoField(primary_key=True, db_column='sub_id')
+    sub_course = models.ManyToManyField(CourseCategory,
+                            verbose_name='Subject',
+                            db_column = 'sub_course',
+                            related_name='subject',
+                            null=True)
+    sub_title = models.CharField('Title', max_length=255)
+    sub_slug = models.SlugField('Slug', max_length=255)
+    sub_short = models.TextField('Short description', blank=True, null=True)
+    sub_long = models.TextField('Long description', blank=True, null=True)
+    sub_created_at = models.DateTimeField('Created at', auto_now_add=True)
+    def __str__(self):
+        return self.sub_title
