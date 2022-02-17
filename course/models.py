@@ -30,7 +30,7 @@ class Course(models.Model):
 
 class Subject(models.Model):
     sub_id = models.AutoField(primary_key=True, db_column='sub_id')
-    sub_course = models.ManyToManyField(CourseCategory,
+    sub_course = models.ManyToManyField(Course,
                             verbose_name='Subject',
                             db_column = 'sub_course',
                             related_name='subject',
