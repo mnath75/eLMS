@@ -15,7 +15,7 @@ class CategoryModelViewSet(viewsets.ModelViewSet):
 
 class CourseModelViewSet(viewsets.ModelViewSet):
   queryset = Course.objects.all()
-  filter_backends = (filters.DjangoFilterBackend)
+  filter_backends = (filters.DjangoFilterBackend,)
   filterset_fields = ['cr_categ']
   serializer_class = CourseSerializer  
 
