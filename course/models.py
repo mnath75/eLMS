@@ -17,8 +17,7 @@ class Course(models.Model):
     cr_categ = models.ManyToManyField(CourseCategory,
                             verbose_name='Category',
                             db_column = 'cr_categ',
-                            related_name='courses',
-                            null=True)
+                            related_name='courses')
     cr_title = models.CharField('Title', max_length=255)
     cr_slug = models.SlugField('Slug', max_length=255)
     cr_short = models.TextField('Short description', blank=True, null=True)
@@ -33,8 +32,7 @@ class Subject(models.Model):
     sub_course = models.ManyToManyField(Course,
                             verbose_name='Subject',
                             db_column = 'sub_course',
-                            related_name='subject',
-                            null=True)
+                            related_name='subject')
     sub_title = models.CharField('Title', max_length=255)
     sub_slug = models.SlugField('Slug', max_length=255)
     sub_short = models.TextField('Short description', blank=True, null=True)
