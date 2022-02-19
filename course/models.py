@@ -40,3 +40,16 @@ class Subject(models.Model):
     sub_created_at = models.DateTimeField('Created at', auto_now_add=True)
     def __str__(self):
         return self.sub_title
+class Topic(models.Model):
+    top_id = models.AutoField(primary_key=True, db_column='top_id')
+    top_subject = models.ManyToManyField(Subject,
+                            verbose_name='subjects',
+                            db_column = 'sub_categ',
+                            related_name='subjects')
+    top_title = models.CharField('Title', max_length=255)
+    top_slug = models.SlugField('Slug', max_length=255)
+    top_short = models.TextField('Short description', blank=True, null=True)
+    top_long = models.TextField('Long description', blank=True, null=True)
+    top_created_at = models.DateTimeField('Created at', auto_now_add=True)
+    def __str__(self):
+        return self.top_title        
