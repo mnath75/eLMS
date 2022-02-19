@@ -43,9 +43,9 @@ class Subject(models.Model):
 class Topic(models.Model):
     top_id = models.AutoField(primary_key=True, db_column='top_id')
     top_subject = models.ManyToManyField(Subject,
-                            verbose_name='subjects',
-                            db_column = 'sub_categ',
-                            related_name='subjects')
+                            verbose_name='topics',
+                            db_column = 'top_subject',
+                            related_name='topics')
     top_title = models.CharField('Title', max_length=255)
     top_slug = models.SlugField('Slug', max_length=255 ,null=True)
     top_short = models.TextField('Short description', blank=True, null=True)
