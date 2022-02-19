@@ -43,11 +43,11 @@ class Subject(models.Model):
 class Topic(models.Model):
     top_id = models.AutoField(primary_key=True, db_column='top_id')
     top_subject = models.ManyToManyField(Subject,
-                            verbose_name='topics',
+                            verbose_name='Topic',
                             db_column = 'top_subject',
                             related_name='topics')
     top_title = models.CharField('Title', max_length=255)
-    top_slug = models.SlugField('Slug', max_length=255 ,null=True)
+    top_slug = models.SlugField('Slug', max_length=255,blank=True,null=True)
     top_short = models.TextField('Short description', blank=True, null=True)
     top_long = models.TextField('Long description', blank=True, null=True)
     top_created_at = models.DateTimeField('Created at', auto_now_add=True)

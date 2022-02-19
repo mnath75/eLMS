@@ -27,6 +27,6 @@ class SubjectSerializer(serializers.ModelSerializer):
         fields = ('sub_id','sub_title','sub_course')
 
 class TopicSerializer(serializers.ModelSerializer):
- class Meta:
-  model = Topic
-  fields = ['top_id','top_title','top_subject']
+    class Meta:
+        model = Topic
+        fields = ('top_id','top_title','top_subject')
