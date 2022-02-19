@@ -47,7 +47,7 @@ class Topic(models.Model):
                             db_column = 'sub_categ',
                             related_name='subjects')
     top_title = models.CharField('Title', max_length=255)
-    top_slug = models.SlugField('Slug', max_length=255)
+    top_slug = models.SlugField('Slug', max_length=255 ,null=True)
     top_short = models.TextField('Short description', blank=True, null=True)
     top_long = models.TextField('Long description', blank=True, null=True)
     top_created_at = models.DateTimeField('Created at', auto_now_add=True)
