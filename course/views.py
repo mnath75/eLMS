@@ -16,8 +16,8 @@ class CategoryModelViewSet(viewsets.ModelViewSet):
 
 
 class CourseModelViewSet(viewsets.ModelViewSet):
-  #authentication_classes = (TokenAuthentication,)
-  #permission_classes = [permissions.IsAuthenticated, ]
+  authentication_classes = (TokenAuthentication,)
+  permission_classes = [permissions.IsAuthenticated, ]
   queryset = Course.objects.all()
   filter_backends = (filters.DjangoFilterBackend,)
   filterset_fields = ['cr_categ']
