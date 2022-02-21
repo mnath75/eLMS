@@ -18,16 +18,20 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
+from Quiz import views as vi
 router = DefaultRouter()
 from course import views
 router.register('categoryapi', views.CategoryModelViewSet, basename='category')
 router.register('courseapi', views.CourseModelViewSet, basename='course')
 router.register('subjectapi', views.SubjectModelViewSet, basename='subject')
 router.register('topicapi', views.TopicModelViewSet, basename='topic')
+router.register('Qtype', vi.QtypeModelViewSet, basename='qtype')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include('account.urls')),
     path('course/',include('course.urls')),
+    path('quiz/',include('Quiz.urls')),
     path('', include(router.urls))
 ]
 if settings.DEBUG:
