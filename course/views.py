@@ -6,6 +6,8 @@ from rest_framework import viewsets
 from .models import CourseCategory,Course,Subject,Topic
 from rest_framework.response import Response
 from django_filters import rest_framework as filters
+from rest_framework import status,permissions
+from knox.auth import TokenAuthentication
 
 class CategoryModelViewSet(viewsets.ModelViewSet):
   queryset = CourseCategory.objects.all()
@@ -14,10 +16,14 @@ class CategoryModelViewSet(viewsets.ModelViewSet):
 
 
 class CourseModelViewSet(viewsets.ModelViewSet):
+  authentication_classes = (TokenAuthentication,)
+  permission_classes = [permissions.IsAuthenticated, ]
   queryset = Course.objects.all()
   filter_backends = (filters.DjangoFilterBackend,)
   filterset_fields = ['cr_categ']
   serializer_class = CourseSerializer  
+
+  
 
 class SubjectModelViewSet(viewsets.ModelViewSet):
   queryset = Subject.objects.all()

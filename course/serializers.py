@@ -21,6 +21,7 @@ class CourseSerializer(serializers.ModelSerializer):
         model = Course
         fields = ('cr_id','cr_title','cr_categ') 
 
+
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subject
