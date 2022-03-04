@@ -30,6 +30,7 @@ class QuestionSerializer(serializers.ModelSerializer):
         'qtype',
         'solution',
         'description',
+        'language'
        # 'answer',
         ]        
        
