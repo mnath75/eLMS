@@ -9,12 +9,16 @@ from django_filters import rest_framework as filters
 
 class ViewsetQuestion(viewsets.ModelViewSet):
   queryset =Question.objects.all()
-  #filter_backends = (filters.DjangoFilterBackend,)
-  #filterset_fields = ['qtype']
+  filter_backends = (filters.DjangoFilterBackend,)
+  filterset_fields = ['qtype']
   serializer_class = QuestionSerializer 
 
 class ViewsetAnswer(viewsets.ModelViewSet):
   queryset =Answer.objects.all()
-  #filter_backends = (filters.DjangoFilterBackend,)
-  #filterset_fields = ['qtype']
+  filter_backends = (filters.DjangoFilterBackend,)
+  filterset_fields = ['qtype']
   serializer_class = AnswerSerializer 
+
+
+
+   

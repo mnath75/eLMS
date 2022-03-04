@@ -44,7 +44,7 @@ class Question(ObjectTracking):
         verbose_name_plural = ("Questions")
         ordering = ['id']
     qtype = models.ForeignKey(
-        Qtype, related_name='qtype_qproto', on_delete=models.DO_NOTHING)
+        Qtype, related_name='qtype', on_delete=models.DO_NOTHING)
 
     difficulty = models.ForeignKey(
         Dlevel, related_name='dlavel_qproto', on_delete=models.DO_NOTHING)
