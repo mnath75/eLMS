@@ -21,17 +21,21 @@ from rest_framework.routers import DefaultRouter
 from Quiz import views as vi
 router = DefaultRouter()
 from course import views
+from exam import views as ex
 router.register('categoryapi', views.CategoryModelViewSet, basename='category')
 router.register('courseapi', views.CourseModelViewSet, basename='course')
 router.register('subjectapi', views.SubjectModelViewSet, basename='subject')
 router.register('topicapi', views.TopicModelViewSet, basename='topic')
 router.register('Qtype', vi.QtypeModelViewSet, basename='qtype')
+router.register('questions', ex.ViewsetQuestion, basename='question')
+router.register('answers', ex.ViewsetAnswer, basename='answer')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include('account.urls')),
     path('course/',include('course.urls')),
     path('quiz/',include('Quiz.urls')),
+    path('exam/',include('exam.urls')),
     path('', include(router.urls))
 ]
 if settings.DEBUG:
