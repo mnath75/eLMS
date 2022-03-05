@@ -60,8 +60,13 @@ class Question(ObjectTracking):
     is_active = models.BooleanField(
         default=False, verbose_name=_("Active Status"))
 
+    @property
+    def answers(self):
+        return answer_set.all()    
+
     def __str__(self):
-        return self.title   
+        return self.title  
+         
 
 class Answer(ObjectTracking):
     class Meta:

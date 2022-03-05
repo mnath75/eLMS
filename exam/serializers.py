@@ -18,7 +18,7 @@ class AnswerSerializer(serializers.ModelSerializer):
         ]
 class QuestionSerializer(serializers.ModelSerializer):
 
-    #answer = AnswerSerializer(many=True,read_only=True)
+    answer_set = AnswerSerializer(many=True,read_only=True)
     
     class Meta:
     
@@ -30,10 +30,10 @@ class QuestionSerializer(serializers.ModelSerializer):
         'qtype',
         'solution',
         'description',
-        'language'
-       # 'answer',
+        'language',
+        'answer_set'
         ]        
-       
+        depth=1
 
 
 
