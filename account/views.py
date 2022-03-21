@@ -1,11 +1,11 @@
 from django.shortcuts import render,get_object_or_404
 from .serializers import (CreateUserSerializer, ChangePasswordSerializer,
-                          UserSerializer, LoginUserSerializer, ForgetPasswordSerializer)
+                          UserSerializer, LoginUserSerializer, ForgetPasswordSerializer,ProfileSerializer)
 
 from rest_framework import permissions, generics, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from account.models import User, PhoneOTP
+from account.models import User, PhoneOTP,Profile
 from rest_framework.views import APIView
 from .utilmaths import phone_validator, password_generator, otp_generator 
 import requests
@@ -15,7 +15,7 @@ from knox.auth import TokenAuthentication
 from knox.views import LoginView as KnoxLoginView
 from django.views.decorators.csrf import csrf_exempt
 
-from rest_framework import permissions, generics, status
+from rest_framework import permissions, generics, status,viewsets
 from django.contrib.auth import login
 
 
@@ -278,12 +278,9 @@ class UpdateProfileView(generics.UpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = UserSerializer
+    
 
+class UserView(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
 
-class UserView(generics.RetrieveAPIView):
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = [permissions.IsAuthenticated, ]
-    serializer_class = UserSerializer
-
-    def get_object(self):
-        return self.request.user

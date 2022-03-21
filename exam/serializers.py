@@ -1,9 +1,6 @@
 from . models import Answer, Language,Question
 from rest_framework import serializers
 
-
-
-
 class AnswerSerializer(serializers.ModelSerializer):
 
     class Meta:

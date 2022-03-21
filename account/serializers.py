@@ -3,7 +3,21 @@ from django.contrib.auth import authenticate
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
+from account.models import Profile
 
+
+class ProfileSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Profile
+        fields = ['id','email','image','pin','city','state','country','address','user']
+
+class User1Serializer(serializers.ModelSerializer):
+    profile=ProfileSerializer(read_only=True)
+   
+    class Meta:
+        model = User
+        fields = ('id', 'phone','profile')
 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,9 +35,10 @@ class UserSerializer(serializers.ModelSerializer):
    
     class Meta:
         model = User
-        fields = ('id', 'phone', 'first_login' )
+        fields = ('id', 'phone' )
 
-   
+
+
 class LoginUserSerializer(serializers.Serializer):
     phone = serializers.CharField()
     password = serializers.CharField(
@@ -76,4 +91,6 @@ class ForgetPasswordSerializer(serializers.Serializer):
     """
     phone = serializers.CharField(required=True)
     password = serializers.CharField(required=True)
+
+
    

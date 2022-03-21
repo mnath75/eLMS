@@ -154,18 +154,21 @@ def get_filename_ext(filepath):
     return name, ext
 
 
+ 
+
 class Profile(models.Model):
     user            =   models.OneToOneField(User, on_delete= models.CASCADE)
     email           =   models.EmailField( blank = True, null = True)
-    image           =   models.ImageField(upload_to = upload_image_path_profile, default=None, null = True, blank = True)
-    address         =   models.CharField(max_length = 900, blank = True, null = True)
+    image           =   models.ImageField(upload_to = upload_image_path_profile, default=None,null=True, blank = True)
+    pin             =   models.IntegerField(max_length=6,default=0)
     city            =   models.CharField(max_length = 30, blank = True, null = True)
-    first_count     =   models.IntegerField(default=0, help_text='It is 0, if the user is totally new and 1 if the user has saved his standard once' )
+    state           =   models.CharField(max_length = 30, blank = True, null = True)
+    country         =   models.CharField(max_length = 30, blank = True, null = True)
 
+    address         =   models.CharField(max_length = 900, blank = True, null = True)
+    
     def __str__(self):
-        return str(self.user) 
-
-
+        return str(self.user.name) 
 
 
 def user_created_receiver(sender, instance, created, *args, **kwargs):
