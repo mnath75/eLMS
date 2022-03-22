@@ -79,6 +79,7 @@ class User(AbstractBaseUser):
     branch      = models.BooleanField(default=False)
     timestamp   = models.DateTimeField(auto_now_add=True)
 
+
     USERNAME_FIELD = 'phone'
     REQUIRED_FIELDS = []
     objects = UserManager()
@@ -164,9 +165,10 @@ class Profile(models.Model):
     city            =   models.CharField(max_length = 30, blank = True, null = True)
     state           =   models.CharField(max_length = 30, blank = True, null = True)
     country         =   models.CharField(max_length = 30, blank = True, null = True)
-
     address         =   models.CharField(max_length = 900, blank = True, null = True)
-    
+    gender          =   models.CharField(max_length = 900, blank = True, null = True)
+    qualification   =   models.CharField(max_length = 900, blank = True, null = True)
+    dob             =   models.DateField(max_length=8, blank = True, null = True)
     def __str__(self):
         return str(self.user.name) 
 
