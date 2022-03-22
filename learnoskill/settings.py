@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'course',
     'django_filters',
     'Quiz',
-    'exam'
+    'exam',
+    'course2'
    
 ]
 

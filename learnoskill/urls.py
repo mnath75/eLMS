@@ -23,6 +23,7 @@ router = DefaultRouter()
 from course import views
 from exam import views as ex
 from account import views as ac
+from course2 import views as ba
 
 router.register('categoryapi', views.CategoryModelViewSet, basename='category')
 router.register('courseapi', views.CourseModelViewSet, basename='course')
@@ -32,6 +33,8 @@ router.register('Qtype', vi.QtypeModelViewSet, basename='qtype')
 router.register('questions', ex.ViewsetQuestion, basename='question')
 router.register('answers', ex.ViewsetAnswer, basename='answer')
 router.register('userprofile',ac.UserView,basename="profile") 
+router.register('categorybatch',ba.CategoryModelViewSet,basename="catbatch") 
+router.register('coursebatch',ba.CourseModelViewSet,basename="coursebatch") 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,6 +42,7 @@ urlpatterns = [
     path('course/',include('course.urls')),
     path('quiz/',include('Quiz.urls')),
     path('exam/',include('exam.urls')),
+    path('course2/',include('course2.urls')),
     path('', include(router.urls))
 ]
 if settings.DEBUG:
