@@ -11,13 +11,14 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ['id','email','image','pin','city','state','country','address','user','gender','qualification','dob']
-
+        depth=1
 class User1Serializer(serializers.ModelSerializer):
     profile=ProfileSerializer(read_only=True)
    
     class Meta:
         model = User
         fields = ('id', 'phone','name','profile')
+    
 
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:

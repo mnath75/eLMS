@@ -20,5 +20,6 @@ class batchCourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = batchCourse
         fields = ('bcr_id','bcr_title','bcr_categ') 
+       
 
 
